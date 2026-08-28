@@ -15,133 +15,332 @@ import {
 
 type Category = "all" | "food" | "flasks" | "weapons";
 
-const FOOD_ROWS: string[][] = [
+const HR = "Cooking 300 High-Risk";
+
+const FOOD_SINGLE_ROWS: string[][] = [
   [
+    "Feast",
     "Azerothian Schmorgus Board",
     "Raid feast: +35 AP or +20 SP and +15 Stam, 30 min",
-    "1 Lava Eel, 5 Goblin Spices, 1 Devilsaur Meat, 1 Bear Flank",
+    "Dirge: 1 Lava Eel, 5 Goblin Spices, 1 Devilsaur Meat, 1 Bear Flank",
   ],
   [
-    "Ghostly Goulash",
-    "+14 crit rating, 30 min",
-    "1 Bear Flank, 1 Refreshing Spring Water, 1 Ghost Dust, 1 Goblin Spices",
+    "Agility",
+    "Fused Air Fried Chops",
+    "+23 Agility, 1 hr",
+    "High-Risk: Cured Savage Meat, Scorched Silithid Meat, 2 Mystery Meat",
   ],
   [
-    "Hydra Scale Soup",
-    "+10 spell haste rating, 30 min",
-    "1 Raw Spinefin Halibut, 1 Large Hydra Scale, 1 Goblin Spices, 1 Refreshing Spring Water",
+    "Strength",
+    "Fused Charred Steak",
+    "+23 Strength, 1 hr",
+    "High-Risk: Cured Savage Meat, Seared Savage Chimaera Meat, 2 Mystery Meat",
   ],
   [
-    "Silithid Snack",
-    "+13 armor penetration rating, 30 min",
-    "1 Sandworm Meat, 1 Silithid Innards, 1 Goblin Spices",
+    "Intellect",
+    "Fused Steamed Wontons",
+    "+25 Intellect, 1 hr",
+    HR,
   ],
   [
-    "Dirge's Nevermelt Ice Cream",
-    "+10 hit rating, 30 min",
-    "1 Shard of Nevermelting Ice, 1 Ice Cold Milk, 1 Sugar",
+    "Spirit",
+    "Fused Living Soup",
+    "+23 Spirit, 1 hr",
+    "High-Risk: Cured Savage Meat, Shadowcharred Animated Meat, 2 Mystery Meat",
   ],
   [
-    "Spicy Dino Jerky",
-    "+20 Agility, 30 min",
-    "1 Dino Meat, 1 Goblin Spices",
+    "Stamina",
+    "Fused Rock's Stew",
+    "+28 Stamina, 1 hr",
+    "High-Risk: Cured Savage Meat, Shadowcharred Animated Meat, 2 Mystery Meat",
   ],
   [
+    "Hit",
+    "Fused Savory Chops, Steak, or Wontons",
+    "+14 hit and +10 Agi, Str, or Int, 1 hr (Chops and Steak persist through death)",
+    HR,
+  ],
+  [
+    "Melee crit",
+    "Fused Red-Hot Stew",
+    "+14 melee crit and +14 Stam, 1 hr",
+    HR,
+  ],
+  [
+    "Spell crit",
+    "Fused Blazing Stew",
+    "+9 spell crit and +15 Stam, 1 hr (persists through death)",
+    HR,
+  ],
+  [
+    "Melee / ranged haste",
     "Rubbed Ravasaur Ribs",
-    "+23 melee and ranged haste rating, 30 min",
-    "1 Ravasaur Ribs, 1 Goblin Spices",
+    "+23 melee and ranged haste, 30 min (beats Fused Seared Chops' +8 haste)",
+    "Dirge: 1 Ravasaur Ribs, 1 Goblin Spices",
   ],
   [
-    "Seared Cunning Carp",
-    "+20 Intellect, 30 min",
-    "1 Cunning Carp, 1 Goblin Spices",
+    "Spell haste",
+    "Hydra Scale Soup",
+    "+10 spell haste, 30 min (beats Fused Seared Wontons' +8 haste)",
+    "Dirge: 1 Raw Spinefin Halibut, 1 Large Hydra Scale, 1 Goblin Spices, 1 Water",
   ],
   [
-    "Chilled Lava Eel",
-    "Damaging abilities have a chance to deal extra Fire damage, 30 min",
-    "1 Lava Eel, 1 Shard of Nevermelting Ice",
+    "Armor penetration",
+    "Silithid Snack",
+    "+13 armor pen, 30 min (beats Fused Piercing +8)",
+    "Dirge: 1 Sandworm Meat, 1 Silithid Innards, 1 Goblin Spices",
   ],
   [
-    "Hearty Stegodon Stew",
-    "+10 defense rating, 30 min",
-    "1 Stegodon Meat, 1 Goblin Spices, 1 Refreshing Spring Water",
+    "Dodge",
+    "Fused Duck Stew",
+    "+16 dodge and +15 Stam, 1 hr",
+    HR,
   ],
   [
-    "Crispy Pterrordax Wing",
-    "+14 dodge rating, 30 min",
-    "1 Pterrordax Wing, 1 Goblin Spices",
-  ],
-  [
+    "Parry",
     "Hippogryph Steak",
-    "+16 parry rating, 30 min",
-    "1 Hippogryph Meat, 1 Goblin Spices",
+    "+16 parry, 30 min (beats Fused Simmered Stew +12 parry)",
+    "Dirge: 1 Hippogryph Meat, 1 Goblin Spices",
   ],
   [
-    "Steamed Makrinni Claw",
-    "+14 block value, 30 min",
-    "1 Makrinni Claw, 1 Goblin Spices",
+    "Block",
+    "Fused Chunky Stew",
+    "+14 block value and +15 Stam, 1 hr",
+    HR,
   ],
   [
+    "Defense",
+    "Hearty Stegodon Stew",
+    "+10 defense rating, 30 min (no Fused defense food)",
+    "Dirge: 1 Stegodon Meat, 1 Goblin Spices, 1 Refreshing Spring Water",
+  ],
+  [
+    "Spell power",
+    "Fused Wizard Wontons",
+    "+10 SP and +15 Intellect, 1 hr",
+    HR,
+  ],
+  [
+    "MP5",
+    "Fused Heightened Wontons",
+    "+25 MP5 and +200 mana, 1 hr (persists through death)",
+    HR,
+  ],
+  [
+    "Energy",
+    "Fused Vibrant Chops",
+    "+7 max energy, 1 hr (persists through death)",
+    HR,
+  ],
+  [
+    "Fire proc",
+    "Chilled Lava Eel",
+    "Damaging abilities can deal extra Fire damage, 30 min",
+    "Dirge: 1 Lava Eel, 1 Shard of Nevermelting Ice",
+  ],
+  [
+    "All-school resist",
     "Chillwind Flank Steak",
     "+8 all-school resistance, 30 min",
-    "1 Chillwind Flank, 1 Goblin Spices",
+    "Dirge: 1 Chillwind Flank, 1 Goblin Spices",
+  ],
+];
+
+const FOOD_COMBO_ROWS: string[][] = [
+  [
+    "Agility + Stamina",
+    "Fused Hearty Air Fried Chops",
+    "+10 Agility and +20 Stam, 1 hr",
+    HR,
+  ],
+  [
+    "Agility + Hit",
+    "Fused Clear-Cut Chops or Savory Chops",
+    "Clear-Cut: +15 Agi +10 hit. Savory: +10 Agi +14 hit, persists through death",
+    HR,
+  ],
+  [
+    "Agility + Armor pen",
+    "Fused Piercing Chops",
+    "+8 armor pen and +8 Agility, 1 hr",
+    HR,
+  ],
+  [
+    "Agility + threat down",
+    "Fused Subtle Chops",
+    "10% less threat and +10 Agility, 1 hr",
+    HR,
+  ],
+  [
+    "Strength + Stamina",
+    "Fused Hearty Charred Steak",
+    "+10 Strength and +20 Stam, 1 hr",
+    HR,
+  ],
+  [
+    "Strength + Hit",
+    "Fused Clear-Cut Steak or Savory Steak",
+    "Clear-Cut: +15 Str +10 hit. Savory: +10 Str +14 hit, persists through death",
+    HR,
+  ],
+  [
+    "Strength + Armor pen",
+    "Fused Piercing Steak",
+    "+8 armor pen and +8 Strength, 1 hr",
+    HR,
+  ],
+  [
+    "Strength + threat down",
+    "Fused Subtle Steak",
+    "10% less threat and +10 Strength, 1 hr",
+    HR,
+  ],
+  [
+    "Intellect + Stamina",
+    "Fused Hearty Steamed Wontons",
+    "+20 Intellect and +20 Stam, 1 hr",
+    HR,
+  ],
+  [
+    "Intellect + Hit",
+    "Fused Clear-Cut Wontons or Savory Wontons",
+    "Clear-Cut: +18 Int +8 hit. Savory: +10 Int +14 hit",
+    HR,
+  ],
+  [
+    "Intellect + Spell power",
+    "Fused Wizard Wontons",
+    "+15 Intellect and +10 SP, 1 hr",
+    HR,
+  ],
+  [
+    "Intellect + threat down",
+    "Fused Subtle Wontons",
+    "10% less threat and +15 Intellect, 1 hr",
+    HR,
+  ],
+  [
+    "Spirit + Stamina",
+    "Fused Hearty Living Soup",
+    "+15 Spirit and +20 Stam, 1 hr",
+    HR,
+  ],
+  [
+    "Spirit + Spell power",
+    "Fused Wizard Soup",
+    "+12 Spirit and +10 SP, 1 hr",
+    HR,
+  ],
+  [
+    "Haste + Attack power",
+    "Fused Seared Chops",
+    "+8 haste and +20 AP, 1 hr",
+    HR,
+  ],
+  [
+    "Haste + Spell power",
+    "Fused Seared Wontons",
+    "+8 haste and +8 SP, 1 hr",
+    HR,
+  ],
+  [
+    "Melee crit + Stamina",
+    "Fused Red-Hot Stew",
+    "+14 melee crit and +14 Stam, 1 hr",
+    HR,
+  ],
+  [
+    "Spell crit + Stamina",
+    "Fused Blazing Stew",
+    "+9 spell crit and +15 Stam, 1 hr (persists through death)",
+    HR,
+  ],
+  [
+    "Hit + Stamina",
+    "Fused Savory Stew",
+    "+14 hit and +10 Stam, 1 hr (persists through death)",
+    HR,
+  ],
+  [
+    "Tank threat + Dodge",
+    "Fused Bold Duck Stew",
+    "+10% threat and +12 dodge, 1 hr",
+    HR,
+  ],
+  [
+    "Tank threat + Parry",
+    "Fused Bold Simmered Stew",
+    "+10% threat and +12 parry, 1 hr",
+    HR,
+  ],
+  [
+    "Tank threat + Stamina",
+    "Fused Bold Stew",
+    "+10% threat and +20 Stam, 1 hr",
+    HR,
+  ],
+  [
+    "School resist + Stamina",
+    "Fused Sizzling, Winter, Wild, Blackened, or Mana Imbued Roast",
+    "+15 Fire, Frost, Nature, Shadow, or Arcane resist and +20 Stam, 1 hr",
+    HR,
   ],
 ];
 
 const DISTILLED_FLASK_ROWS: string[][] = [
   [
     "Distilled Flask of the Unyielding",
-    "+30 Stamina and +20 defense rating, 2 hr (persists through death)",
+    "+30 Stamina and +20 defense rating",
     "1 Fiery Frond, 1 Blightroot Extract, 10 Mountain Silversage, 2 Essence of Earth",
   ],
   [
     "Distilled Flask of the Warsong",
-    "+20 Strength and +10 armor penetration rating, 2 hr (persists through death)",
+    "+20 Strength and +10 armor penetration rating",
     "1 Plague Blossom, 1 Blightroot Extract, 10 Icecap, 2 Essence of Fire",
   ],
   [
     "Distilled Flask of Butchery",
-    "+28 Agility and +10 armor penetration rating, 2 hr (persists through death)",
+    "+28 Agility and +10 armor penetration rating",
     "1 Fiery Frond, 1 Blightroot Extract, 10 Plaguebloom, 2 Essence of Earth",
   ],
   [
     "Distilled Flask of Savage Assault",
-    "+25 haste rating and +55 attack power, 2 hr (persists through death)",
+    "+25 haste rating and +55 attack power",
     "1 Storm Brine, 1 Blightroot Extract, 10 Sungrass, 2 Essence of Air",
   ],
   [
     "Distilled Flask of Adept Striking",
-    "+10 hit rating and +60 attack power, 2 hr (persists through death)",
+    "+10 hit rating and +60 attack power",
     "1 Plague Blossom, 1 Blightroot Extract, 10 Dreamfoil, 2 Essence of Undeath",
   ],
   [
     "Distilled Flask of the Executioner",
-    "+14 crit rating and +60 attack power, 2 hr (persists through death)",
+    "+14 crit rating and +60 attack power",
     "1 Spectral Rose, 1 Blightroot Extract, 10 Plaguebloom, 2 Essence of Fire",
   ],
   [
     "Distilled Flask of Shattering Thunder",
-    "+14 crit rating and +48 spell power, 2 hr (persists through death)",
+    "+14 crit rating and +48 spell power",
     "1 Storm Brine, 1 Blightroot Extract, 10 Sungrass, 2 Essence of Air",
   ],
   [
     "Distilled Flask of Unrelenting Power",
-    "+10 haste rating and +48 spell power, 2 hr (persists through death)",
+    "+10 haste rating and +48 spell power",
     "1 Fiery Frond, 1 Blightroot Extract, 10 Golden Sansam, 2 Essence of Undeath",
   ],
   [
     "Distilled Flask of the Kirin Tor",
-    "+20 Intellect and +50 spell power, 2 hr (persists through death)",
+    "+20 Intellect and +50 spell power",
     "1 Spectral Rose, 1 Blightroot Extract, 10 Arthas' Tears, 2 Essence of Water",
   ],
   [
     "Distilled Flask of Manifesting Power",
-    "+17 Spirit and +53 spell power, 2 hr (persists through death)",
+    "+17 Spirit and +53 spell power",
     "1 Spectral Rose, 1 Blightroot Extract, 10 Mountain Silversage, 2 Living Essence",
   ],
   [
     "Distilled Flask of Deep Meditation",
-    "+53 spell power and +36 MP5, 2 hr (persists through death)",
+    "+53 spell power and +36 MP5",
     "1 Plague Blossom, 1 Blightroot Extract, 10 Icecap, 2 Essence of Water",
   ],
 ];
@@ -149,22 +348,22 @@ const DISTILLED_FLASK_ROWS: string[][] = [
 const CLASSIC_FLASK_ROWS: string[][] = [
   [
     "Flask of the Titans",
-    "+400 maximum health, 2 hr (persists through death)",
+    "+400 maximum health",
     "7 Gromsblood, 3 Stonescale Oil, 1 Black Lotus, 1 Crystal Vial",
   ],
   [
     "Flask of Supreme Power",
-    "+60 spell power, 2 hr (persists through death)",
+    "+60 spell power",
     "7 Dreamfoil, 3 Mountain Silversage, 1 Black Lotus, 1 Crystal Vial",
   ],
   [
     "Flask of Distilled Wisdom",
-    "+65 Intellect, 2 hr (persists through death)",
+    "+65 Intellect",
     "7 Dreamfoil, 3 Icecap, 1 Black Lotus, 1 Crystal Vial",
   ],
   [
     "Flask of Chromatic Resistance",
-    "+25 all-school resistance, 2 hr (persists through death)",
+    "+25 all-school resistance",
     "7 Icecap, 3 Mountain Silversage, 1 Black Lotus, 1 Crystal Vial",
   ],
 ];
@@ -246,14 +445,17 @@ export default function CoARaidConsumables() {
       <Stack gap={8}>
         <H1>CoA raid consumables</H1>
         <Text tone="secondary">
-          Project Ascension Conquest of Azeroth. Stats and reagents from db.ascension.gg
-          item and spell tooltips. Distilled flasks and Dirge cooking are the new
-          Ascension crafts. Classic Black Lotus flasks and weapon oils still work.
+          Project Ascension Conquest of Azeroth. Fused High-Risk food is 1 hour; Dirge
+          cooking is 30 minutes. Stats from db.exil.es, db.ascension.gg, and in-game
+          tooltips. Classic Black Lotus flasks and weapon oils still work.
         </Text>
       </Stack>
 
       <Grid columns={4} gap={12}>
-        <Stat value="14" label="Ascension foods" />
+        <Stat
+          value={String(FOOD_SINGLE_ROWS.length + FOOD_COMBO_ROWS.length)}
+          label="Food picks"
+        />
         <Stat value="11" label="Distilled flasks" />
         <Stat value="4" label="Classic flasks" />
         <Stat value="11" label="Weapon buffs" />
@@ -280,35 +482,54 @@ export default function CoARaidConsumables() {
       </Row>
 
       <Callout tone="info" title="Where to learn and buy">
-        Dirge Quikcleave in Gadgetzan sells Goblin Spices, Sugar, and Recipe: Azerothian
-        Schmorgus Board (20g). Most other new cooking recipes come from his quests or
-        Un'Goro, Azshara, and Winterspring drops. Distilled flask recipes need Alchemy
-        300 and High-Risk extracts: Blightroot Extract plus Fiery Frond, Plague Blossom,
-        Spectral Rose, or Storm Brine. Classic flasks still need an Alchemy Lab and a
-        Black Lotus.
+        Fused food is Cooking 300 High-Risk (typically Cured Savage Meat, a specialty
+        High-Risk meat, and 2 Mystery Meat). Recipes come from Arms Dealer quests and
+        dungeon or raid drops. Dirge Quikcleave in Gadgetzan sells Goblin Spices, Sugar,
+        and Recipe: Azerothian Schmorgus Board (20g). Distilled flasks need Alchemy 300
+        and High-Risk extracts. There is no obtainable Imbued food item on CoA (those
+        crafts are deprecated). No Fused food combines Agility with crit.
       </Callout>
 
       {showFood ? (
-        <Stack gap={12}>
-          <Row gap={8} align="center">
-            <H2>New Ascension food</H2>
-            <Pill tone="neutral" size="sm">
-              Cooking 275-300
-            </Pill>
-            <Pill tone="neutral" size="sm">
-              Well Fed 30 min
-            </Pill>
-          </Row>
-          <Text tone="secondary">
-            Personal food restores about 4k health while eating. The Schmorgus Board is a
-            party feast. Goblin Spices and Sugar are vendor reagents from Dirge.
-          </Text>
-          <Table
-            headers={["Item", "Well Fed", "Ingredients"]}
-            rows={FOOD_ROWS}
-            striped
-            stickyHeader
-          />
+        <Stack gap={16}>
+          <Stack gap={12}>
+            <Row gap={8} align="center">
+              <H2>Best food per stat</H2>
+              <Pill tone="neutral" size="sm">
+                Fused 1 hr or Dirge 30 min
+              </Pill>
+            </Row>
+            <Text tone="secondary">
+              Fused High-Risk wins most primary stats and lasts an hour. Dirge still wins
+              melee haste, spell haste, armor pen, parry, defense, the raid feast, and the
+              Fire-proc eel.
+            </Text>
+            <Table
+              headers={["Stat", "Item", "Well Fed", "Source"]}
+              rows={FOOD_SINGLE_ROWS}
+              striped
+              stickyHeader
+            />
+          </Stack>
+          <Stack gap={12}>
+            <Row gap={8} align="center">
+              <H2>Best stat combinations</H2>
+              <Pill tone="neutral" size="sm">
+                Fused hybrids, 1 hr
+              </Pill>
+            </Row>
+            <Text tone="secondary">
+              Use these when you want two stats on one Well Fed. Clear-Cut trades hit for
+              more of the primary; Savory trades primary for more hit and often persists
+              through death.
+            </Text>
+            <Table
+              headers={["Combo", "Item", "Well Fed", "Source"]}
+              rows={FOOD_COMBO_ROWS}
+              striped
+              stickyHeader
+            />
+          </Stack>
         </Stack>
       ) : null}
 
@@ -319,9 +540,6 @@ export default function CoARaidConsumables() {
               <H2>New Ascension flasks</H2>
               <Pill tone="neutral" size="sm">
                 Distilled, level 60
-              </Pill>
-              <Pill tone="neutral" size="sm">
-                2 hours, survives death
               </Pill>
             </Row>
             <Text tone="secondary">
@@ -336,6 +554,9 @@ export default function CoARaidConsumables() {
               striped
               stickyHeader
             />
+            <Text tone="tertiary" size="small">
+              All Distilled flasks last 2 hours and persist through death.
+            </Text>
           </Stack>
 
           <Stack gap={12}>
@@ -350,6 +571,9 @@ export default function CoARaidConsumables() {
               rows={CLASSIC_FLASK_ROWS}
               striped
             />
+            <Text tone="tertiary" size="small">
+              All classic flasks last 2 hours and persist through death.
+            </Text>
           </Stack>
         </Stack>
       ) : null}
@@ -373,9 +597,8 @@ export default function CoARaidConsumables() {
       ) : null}
 
       <Text tone="tertiary" size="small">
-        Source: db.ascension.gg item and spell tooltips. High-Risk Fused cooking (for example
-        Fused Bold Simmered Stew: 10% threat and +12 parry) is a separate High-Risk craft and
-        is not listed above.
+        Sources: db.exil.es, db.ascension.gg, and in-game tooltips. The Project Ascension
+        Fandom wiki High-Risk Recipes page is 2021 screenshots and has no CoA food table.
       </Text>
     </Stack>
   );
