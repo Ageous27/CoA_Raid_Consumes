@@ -60,10 +60,14 @@ Alchemy Lab and Black Lotus.
 
 ## Weapon oils and stones
 
-Oils go on caster weapons. Sharpening stones are for swords, axes, daggers, and polearms. Weightstones are for maces and staves. Argent Dawn items are undead-only and are bought, not crafted.
+Honor vendors sell the Soldier's line for 500 Honor each (level 60, 1 hour, 5 charges). Classic oils go on caster weapons. Sharpening stones are for swords, axes, daggers, and polearms. Weightstones are for maces and staves. Argent Dawn items are undead-only and are bought, not crafted.
 
 | Item | Effect | Ingredients / source |
 | --- | --- | --- |
+| Soldier's Sharpening Stone | +25 armor penetration and +15 resilience, 1 hr, 5 charges | Honor vendor: 500 Honor Points |
+| Soldier's Iron Grip | 50% Disarm reduction and Resilience Rating, 1 hr, 5 charges | Honor vendor: 500 Honor Points |
+| Soldier's Wizard Oil | +25 spell penetration and +15 resilience, 1 hr, 5 charges | Honor vendor: 500 Honor Points |
+| Soldier's Sage Oil | 20% shorter Silence and Interrupt, +15 resilience, 1 hr, 5 charges | Honor vendor: 500 Honor Points |
 | Brilliant Wizard Oil | +36 spell power and +14 crit rating, 1 hr, 5 charges | Enchanting 300: 2 Large Brilliant Shard, 3 Firebloom, 1 Imbued Vial |
 | Brilliant Mana Oil | +16 MP5 and +28 spell power, 1 hr, 5 charges | Enchanting 300: 2 Large Brilliant Shard, 3 Purple Lotus, 1 Imbued Vial |
 | Elemental Sharpening Stone | +28 crit rating on a melee weapon, 1 hr | Blacksmithing 300: 2 Elemental Earth, 3 Dense Stone |

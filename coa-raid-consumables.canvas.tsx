@@ -171,6 +171,26 @@ const CLASSIC_FLASK_ROWS: string[][] = [
 
 const WEAPON_ROWS: string[][] = [
   [
+    "Soldier's Sharpening Stone",
+    "+25 armor penetration and +15 resilience, 1 hr, 5 charges",
+    "Honor vendor: 500 Honor Points",
+  ],
+  [
+    "Soldier's Iron Grip",
+    "50% Disarm reduction and Resilience Rating, 1 hr, 5 charges",
+    "Honor vendor: 500 Honor Points",
+  ],
+  [
+    "Soldier's Wizard Oil",
+    "+25 spell penetration and +15 resilience, 1 hr, 5 charges",
+    "Honor vendor: 500 Honor Points",
+  ],
+  [
+    "Soldier's Sage Oil",
+    "20% shorter Silence and Interrupt, +15 resilience, 1 hr, 5 charges",
+    "Honor vendor: 500 Honor Points",
+  ],
+  [
     "Brilliant Wizard Oil",
     "+36 spell power and +14 crit rating, 1 hr, 5 charges",
     "Enchanting 300: 2 Large Brilliant Shard, 3 Firebloom, 1 Imbued Vial",
@@ -236,7 +256,7 @@ export default function CoARaidConsumables() {
         <Stat value="14" label="Ascension foods" />
         <Stat value="11" label="Distilled flasks" />
         <Stat value="4" label="Classic flasks" />
-        <Stat value="7" label="Weapon buffs" />
+        <Stat value="11" label="Weapon buffs" />
       </Grid>
 
       <Row gap={8} wrap>
@@ -338,9 +358,10 @@ export default function CoARaidConsumables() {
         <Stack gap={12}>
           <H2>Weapon oils and stones</H2>
           <Text tone="secondary">
-            Oils go on caster weapons. Sharpening stones are for swords, axes, daggers, and
-            polearms. Weightstones are for maces and staves. Argent Dawn items are undead-only
-            and are bought, not crafted.
+            Honor vendors sell the Soldier's line for 500 Honor each (level 60, 1 hour,
+            5 charges). Classic oils go on caster weapons. Sharpening stones are for swords,
+            axes, daggers, and polearms. Weightstones are for maces and staves. Argent Dawn
+            items are undead-only and are bought, not crafted.
           </Text>
           <Table
             headers={["Item", "Effect", "Ingredients / source"]}
