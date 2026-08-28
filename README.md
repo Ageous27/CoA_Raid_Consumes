@@ -120,3 +120,19 @@ Honor vendors sell the Soldier's line for 500 Honor each (level 60, 1 hour, 5 ch
 | Blessed Wizard Oil | +100 spell damage vs undead, 1 hr, not crafted | Argent Dawn Friendly: 8 Necrotic Runes at the Argent Quartermaster |
 
 High-Risk Fused cooking (for example Fused Bold Simmered Stew: 10% threat and +12 parry) is a separate High-Risk craft and is not listed above.
+
+## Zul'Gurub Enchants
+
+Head and legs. Turn in the matching voodoo doll at Zandalar.
+
+| Class | Doll | Enchant | Stats |
+| --- | --- | --- | --- |
+| Warrior | Scarred | Presence of Might | +10 Sta, +10 Def Rating, +30 Block Value |
+| Paladin | Scarlet | Syncretist's Sigil | +10 Sta, +10 Def Rating, +12 SP |
+| Rogue | Sinister | Death's Embrace | +24 AP, +10 Sta, +6 Expertise |
+| Hunter | Tattered | Falcon's Call | +24 AP, +10 Sta, +10 Hit |
+| Shaman | Painted | Vodouisant's Vigilant Embrace | +15 Int, +13 SP |
+| Mage | Woven | Presence of Sight | +18 SP, +8 Hit |
+| Warlock | Runed | Hoodoo Hex | +10 Sta, +18 SP |
+| Priest | Hallowed | Prophetic Aura | +10 Sta, +15 SP, +10 MP5 |
+| Druid | Stitched | Animist's Caress | +10 Sta, +10 Int, +12 SP |

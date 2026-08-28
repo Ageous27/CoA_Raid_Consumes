@@ -13,7 +13,7 @@ import {
   useCanvasState,
 } from "cursor/canvas";
 
-type Category = "all" | "food" | "flasks" | "weapons";
+type Category = "all" | "food" | "flasks" | "weapons" | "zg";
 
 const FOOD_SINGLE_ROWS: string[][] = [
   [
@@ -380,19 +380,35 @@ const WEAPON_ROWS: string[][] = [
   ],
 ];
 
+const ZG_ENCHANT_ROWS: string[][] = [
+  ["Warrior", "Scarred", "Presence of Might", "+10 Sta, +10 Def Rating, +30 Block Value"],
+  ["Paladin", "Scarlet", "Syncretist's Sigil", "+10 Sta, +10 Def Rating, +12 SP"],
+  ["Rogue", "Sinister", "Death's Embrace", "+24 AP, +10 Sta, +6 Expertise"],
+  ["Hunter", "Tattered", "Falcon's Call", "+24 AP, +10 Sta, +10 Hit"],
+  ["Shaman", "Painted", "Vodouisant's Vigilant Embrace", "+15 Int, +13 SP"],
+  ["Mage", "Woven", "Presence of Sight", "+18 SP, +8 Hit"],
+  ["Warlock", "Runed", "Hoodoo Hex", "+10 Sta, +18 SP"],
+  ["Priest", "Hallowed", "Prophetic Aura", "+10 Sta, +15 SP, +10 MP5"],
+  ["Druid", "Stitched", "Animist's Caress", "+10 Sta, +10 Int, +12 SP"],
+];
+
 export default function CoARaidConsumables() {
   const [category, setCategory] = useCanvasState<Category>(
     "coa-consumables-category",
     "all",
   );
   const active: Category =
-    category === "food" || category === "flasks" || category === "weapons"
+    category === "food" ||
+    category === "flasks" ||
+    category === "weapons" ||
+    category === "zg"
       ? category
       : "all";
 
   const showFood = active === "all" || active === "food";
   const showFlasks = active === "all" || active === "flasks";
   const showWeapons = active === "all" || active === "weapons";
+  const showZg = active === "all" || active === "zg";
 
   return (
     <Stack gap={24}>
@@ -405,7 +421,7 @@ export default function CoARaidConsumables() {
         </Text>
       </Stack>
 
-      <Grid columns={4} gap={12}>
+      <Grid columns={5} gap={12}>
         <Stat
           value={String(FOOD_SINGLE_ROWS.length + FOOD_COMBO_ROWS.length)}
           label="Food picks"
@@ -413,6 +429,7 @@ export default function CoARaidConsumables() {
         <Stat value="11" label="Distilled flasks" />
         <Stat value="4" label="Classic flasks" />
         <Stat value="11" label="Weapon buffs" />
+        <Stat value="9" label="Zul'Gurub Enchants" />
       </Grid>
 
       <Row gap={8} wrap>
@@ -422,6 +439,7 @@ export default function CoARaidConsumables() {
             ["food", "Food"],
             ["flasks", "Flasks"],
             ["weapons", "Oils and stones"],
+            ["zg", "Zul'Gurub Enchants"],
           ] as const
         ).map(([id, label]) => (
           <Button
@@ -547,6 +565,23 @@ export default function CoARaidConsumables() {
           <Table
             headers={["Item", "Effect", "Ingredients / source"]}
             rows={WEAPON_ROWS}
+            striped
+            stickyHeader
+          />
+        </Stack>
+      ) : null}
+
+      {showZg ? (
+        <Stack gap={12}>
+          <Row gap={8} align="center">
+            <H2>Zul'Gurub Enchants</H2>
+            <Pill tone="neutral" size="sm">
+              Head and legs
+            </Pill>
+          </Row>
+          <Table
+            headers={["Class", "Doll", "Enchant", "Stats"]}
+            rows={ZG_ENCHANT_ROWS}
             striped
             stickyHeader
           />
