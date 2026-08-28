@@ -15,131 +15,108 @@ import {
 
 type Category = "all" | "food" | "flasks" | "weapons";
 
-const HR = "Cooking 300 High-Risk";
-
 const FOOD_SINGLE_ROWS: string[][] = [
   [
-    "Feast",
     "Azerothian Schmorgus Board",
     "Raid feast: +35 AP or +20 SP and +15 Stam, 30 min",
     "Dirge: 1 Lava Eel, 5 Goblin Spices, 1 Devilsaur Meat, 1 Bear Flank",
   ],
   [
-    "Agility",
     "Fused Air Fried Chops",
     "+23 Agility, 1 hr",
-    "High-Risk: Cured Savage Meat, Scorched Silithid Meat, 2 Mystery Meat",
+    "1 Cured Savage Meat, 1 Scorched Silithid Meat, 2 Mystery Meat",
   ],
   [
-    "Strength",
     "Fused Charred Steak",
     "+23 Strength, 1 hr",
-    "High-Risk: Cured Savage Meat, Seared Savage Chimaera Meat, 2 Mystery Meat",
+    "1 Cured Savage Meat, 1 Seared Savage Chimaera Meat, 2 Mystery Meat",
   ],
   [
-    "Intellect",
     "Fused Steamed Wontons",
     "+25 Intellect, 1 hr",
-    HR,
+    "1 Cured Savage Meat, 1 Salted Naga Tail, 2 Mystery Meat",
   ],
   [
-    "Spirit",
     "Fused Living Soup",
     "+23 Spirit, 1 hr",
-    "High-Risk: Cured Savage Meat, Shadowcharred Animated Meat, 2 Mystery Meat",
+    "1 Cured Savage Meat, 1 Shadowcharred Animated Meat, 2 Mystery Meat",
   ],
   [
-    "Stamina",
     "Fused Rock's Stew",
     "+28 Stamina, 1 hr",
-    "High-Risk: Cured Savage Meat, Shadowcharred Animated Meat, 2 Mystery Meat",
+    "1 Cured Savage Meat, 1 Shadowcharred Animated Meat, 2 Mystery Meat",
   ],
   [
-    "Hit",
     "Fused Savory Chops, Steak, or Wontons",
     "+14 hit and +10 Agi, Str, or Int, 1 hr (Chops and Steak persist through death)",
-    HR,
+    "Chops/Steak: 3 Chimaerok Tenderloin, 2 Essence of Undeath. Wontons: 3 Turtle Meat, 1 Essence of Water",
   ],
   [
-    "Melee crit",
     "Fused Red-Hot Stew",
     "+14 melee crit and +14 Stam, 1 hr",
-    HR,
+    "1 Cured Savage Meat, 1 Seared Savage Chimaera Meat, 2 Sandworm Meat",
   ],
   [
-    "Spell crit",
     "Fused Blazing Stew",
     "+9 spell crit and +15 Stam, 1 hr (persists through death)",
-    HR,
+    "3 Raptor Flesh, 1 Essence of Fire",
   ],
   [
-    "Melee / ranged haste",
     "Rubbed Ravasaur Ribs",
     "+23 melee and ranged haste, 30 min (beats Fused Seared Chops' +8 haste)",
     "Dirge: 1 Ravasaur Ribs, 1 Goblin Spices",
   ],
   [
-    "Spell haste",
     "Hydra Scale Soup",
     "+10 spell haste, 30 min (beats Fused Seared Wontons' +8 haste)",
-    "Dirge: 1 Raw Spinefin Halibut, 1 Large Hydra Scale, 1 Goblin Spices, 1 Water",
+    "Dirge: 1 Raw Spinefin Halibut, 1 Large Hydra Scale, 1 Goblin Spices, 1 Refreshing Spring Water",
   ],
   [
-    "Armor penetration",
     "Silithid Snack",
     "+13 armor pen, 30 min (beats Fused Piercing +8)",
     "Dirge: 1 Sandworm Meat, 1 Silithid Innards, 1 Goblin Spices",
   ],
   [
-    "Dodge",
     "Fused Duck Stew",
     "+16 dodge and +15 Stam, 1 hr",
-    HR,
+    "1 Cured Savage Meat, 1 Salted Naga Tail, 2 Mystery Meat",
   ],
   [
-    "Parry",
     "Hippogryph Steak",
     "+16 parry, 30 min (beats Fused Simmered Stew +12 parry)",
     "Dirge: 1 Hippogryph Meat, 1 Goblin Spices",
   ],
   [
-    "Block",
     "Fused Chunky Stew",
     "+14 block value and +15 Stam, 1 hr",
-    HR,
+    "1 Cured Savage Meat, 1 Scorched Silithid Meat, 2 Raptor Flesh",
   ],
   [
-    "Defense",
     "Hearty Stegodon Stew",
     "+10 defense rating, 30 min (no Fused defense food)",
     "Dirge: 1 Stegodon Meat, 1 Goblin Spices, 1 Refreshing Spring Water",
   ],
   [
-    "Spell power",
     "Fused Wizard Wontons",
     "+10 SP and +15 Intellect, 1 hr",
-    HR,
+    "1 Cured Savage Meat, 1 Salted Naga Tail, 2 Turtle Meat",
   ],
   [
-    "MP5",
     "Fused Heightened Wontons",
     "+25 MP5 and +200 mana, 1 hr (persists through death)",
-    HR,
+    "3 Turtle Meat, 1 Essence of Water",
   ],
   [
-    "Energy",
     "Fused Vibrant Chops",
     "+7 max energy, 1 hr (persists through death)",
-    HR,
+    "3 Raw Nightfin Snapper, 1 Essence of Air",
   ],
   [
-    "Fire proc",
     "Chilled Lava Eel",
     "Damaging abilities can deal extra Fire damage, 30 min",
-    "Dirge: 1 Lava Eel, 1 Shard of Nevermelting Ice",
+    "1 Lava Eel, 1 Shard of Nevermelting Ice",
   ],
   [
-    "All-school resist",
     "Chillwind Flank Steak",
     "+8 all-school resistance, 30 min",
     "Dirge: 1 Chillwind Flank, 1 Goblin Spices",
@@ -148,142 +125,119 @@ const FOOD_SINGLE_ROWS: string[][] = [
 
 const FOOD_COMBO_ROWS: string[][] = [
   [
-    "Agility + Stamina",
     "Fused Hearty Air Fried Chops",
     "+10 Agility and +20 Stam, 1 hr",
-    HR,
+    "1 Cured Savage Meat, 1 Scorched Silithid Meat, 2 Tender Wolf Meat",
   ],
   [
-    "Agility + Hit",
     "Fused Clear-Cut Chops or Savory Chops",
     "Clear-Cut: +15 Agi +10 hit. Savory: +10 Agi +14 hit, persists through death",
-    HR,
+    "Clear-Cut: 1 Cured Savage Meat, 1 Salted Naga Tail, 2 Raptor Flesh. Savory: 3 Chimaerok Tenderloin, 2 Essence of Undeath",
   ],
   [
-    "Agility + Armor pen",
     "Fused Piercing Chops",
     "+8 armor pen and +8 Agility, 1 hr",
-    HR,
+    "1 Cured Savage Meat, 1 Seared Savage Chimaera Meat, 2 Chimaerok Tenderloin",
   ],
   [
-    "Agility + threat down",
     "Fused Subtle Chops",
     "10% less threat and +10 Agility, 1 hr",
-    HR,
+    "1 Cured Savage Meat, 1 Seared Savage Chimaera Meat, 2 Mystery Meat",
   ],
   [
-    "Strength + Stamina",
     "Fused Hearty Charred Steak",
     "+10 Strength and +20 Stam, 1 hr",
-    HR,
+    "1 Cured Savage Meat, 1 Salted Naga Tail, 2 Raw Nightfin Snapper",
   ],
   [
-    "Strength + Hit",
     "Fused Clear-Cut Steak or Savory Steak",
     "Clear-Cut: +15 Str +10 hit. Savory: +10 Str +14 hit, persists through death",
-    HR,
+    "Clear-Cut: 1 Cured Savage Meat, 1 Shadowcharred Animated Meat, 2 Giant Egg. Savory: 3 Chimaerok Tenderloin, 2 Essence of Undeath",
   ],
   [
-    "Strength + Armor pen",
     "Fused Piercing Steak",
     "+8 armor pen and +8 Strength, 1 hr",
-    HR,
+    "1 Cured Savage Meat, 1 Salted Naga Tail, 2 Sandworm Meat",
   ],
   [
-    "Strength + threat down",
     "Fused Subtle Steak",
     "10% less threat and +10 Strength, 1 hr",
-    HR,
+    "1 Cured Savage Meat, 1 Scorched Silithid Meat, 2 Mystery Meat",
   ],
   [
-    "Intellect + Stamina",
     "Fused Hearty Steamed Wontons",
     "+20 Intellect and +20 Stam, 1 hr",
-    HR,
+    "1 Cured Savage Meat, 1 Shadowcharred Animated Meat, 2 Turtle Meat",
   ],
   [
-    "Intellect + Hit",
     "Fused Clear-Cut Wontons or Savory Wontons",
     "Clear-Cut: +18 Int +8 hit. Savory: +10 Int +14 hit",
-    HR,
+    "Clear-Cut: 1 Cured Savage Meat, 1 Seared Savage Chimaera Meat, 2 Raw Nightfin Snapper. Savory: 3 Turtle Meat, 1 Essence of Water",
   ],
   [
-    "Intellect + Spell power",
     "Fused Wizard Wontons",
     "+15 Intellect and +10 SP, 1 hr",
-    HR,
+    "1 Cured Savage Meat, 1 Salted Naga Tail, 2 Turtle Meat",
   ],
   [
-    "Intellect + threat down",
     "Fused Subtle Wontons",
     "10% less threat and +15 Intellect, 1 hr",
-    HR,
+    "1 Cured Savage Meat, 1 Salted Naga Tail, 2 Mystery Meat",
   ],
   [
-    "Spirit + Stamina",
     "Fused Hearty Living Soup",
     "+15 Spirit and +20 Stam, 1 hr",
-    HR,
+    "1 Cured Savage Meat, 1 Seared Savage Chimaera Meat, 2 Giant Egg",
   ],
   [
-    "Spirit + Spell power",
     "Fused Wizard Soup",
     "+12 Spirit and +10 SP, 1 hr",
-    HR,
+    "1 Cured Savage Meat, 1 Shadowcharred Animated Meat, 2 Giant Egg",
   ],
   [
-    "Haste + Attack power",
     "Fused Seared Chops",
     "+8 haste and +20 AP, 1 hr",
-    HR,
+    "1 Cured Savage Meat, 1 Scorched Silithid Meat, 2 Giant Egg",
   ],
   [
-    "Haste + Spell power",
     "Fused Seared Wontons",
     "+8 haste and +8 SP, 1 hr",
-    HR,
+    "1 Cured Savage Meat, 1 Scorched Silithid Meat, 2 Chimaerok Tenderloin",
   ],
   [
-    "Melee crit + Stamina",
     "Fused Red-Hot Stew",
     "+14 melee crit and +14 Stam, 1 hr",
-    HR,
+    "1 Cured Savage Meat, 1 Seared Savage Chimaera Meat, 2 Sandworm Meat",
   ],
   [
-    "Spell crit + Stamina",
     "Fused Blazing Stew",
     "+9 spell crit and +15 Stam, 1 hr (persists through death)",
-    HR,
+    "3 Raptor Flesh, 1 Essence of Fire",
   ],
   [
-    "Hit + Stamina",
     "Fused Savory Stew",
     "+14 hit and +10 Stam, 1 hr (persists through death)",
-    HR,
+    "3 Mystery Meat, 2 Essence of Undeath",
   ],
   [
-    "Tank threat + Dodge",
     "Fused Bold Duck Stew",
     "+10% threat and +12 dodge, 1 hr",
-    HR,
+    "1 Cured Savage Meat, 1 Shadowcharred Animated Meat, 2 Turtle Meat",
   ],
   [
-    "Tank threat + Parry",
     "Fused Bold Simmered Stew",
     "+10% threat and +12 parry, 1 hr",
-    HR,
+    "1 Cured Savage Meat, 1 Scorched Silithid Meat, 2 Tender Wolf Meat",
   ],
   [
-    "Tank threat + Stamina",
     "Fused Bold Stew",
     "+10% threat and +20 Stam, 1 hr",
-    HR,
+    "1 Cured Savage Meat, 1 Seared Savage Chimaera Meat, 2 Sandworm Meat",
   ],
   [
-    "School resist + Stamina",
     "Fused Sizzling, Winter, Wild, Blackened, or Mana Imbued Roast",
     "+15 Fire, Frost, Nature, Shadow, or Arcane resist and +20 Stam, 1 hr",
-    HR,
+    "Sizzling/Winter: 1 Cured Savage Meat, 1 Shadowcharred Animated Meat, 2 Mystery Meat. Wild/Blackened: 1 Cured Savage Meat, 1 Seared Savage Chimaera Meat, 2 Mystery Meat. Mana Imbued: 1 Cured Savage Meat, 1 Salted Naga Tail, 2 Mystery Meat",
   ],
 ];
 
@@ -482,12 +436,11 @@ export default function CoARaidConsumables() {
       </Row>
 
       <Callout tone="info" title="Where to learn and buy">
-        Fused food is Cooking 300 High-Risk (typically Cured Savage Meat, a specialty
-        High-Risk meat, and 2 Mystery Meat). Recipes come from Arms Dealer quests and
-        dungeon or raid drops. Dirge Quikcleave in Gadgetzan sells Goblin Spices, Sugar,
-        and Recipe: Azerothian Schmorgus Board (20g). Distilled flasks need Alchemy 300
-        and High-Risk extracts. There is no obtainable Imbued food item on CoA (those
-        crafts are deprecated). No Fused food combines Agility with crit.
+        Dirge Quikcleave in Gadgetzan sells Goblin Spices, Sugar, and Recipe: Azerothian
+        Schmorgus Board (20g). Fused recipes come from Arms Dealer quests and dungeon or
+        raid drops. Distilled flasks need Alchemy 300 and High-Risk extracts. There is no
+        obtainable Imbued food item on CoA (those crafts are deprecated). No Fused food
+        combines Agility with crit.
       </Callout>
 
       {showFood ? (
@@ -505,7 +458,7 @@ export default function CoARaidConsumables() {
               Fire-proc eel.
             </Text>
             <Table
-              headers={["Stat", "Item", "Well Fed", "Source"]}
+              headers={["Item", "Well Fed", "Ingredients"]}
               rows={FOOD_SINGLE_ROWS}
               striped
               stickyHeader
@@ -524,11 +477,15 @@ export default function CoARaidConsumables() {
               through death.
             </Text>
             <Table
-              headers={["Combo", "Item", "Well Fed", "Source"]}
+              headers={["Item", "Well Fed", "Ingredients"]}
               rows={FOOD_COMBO_ROWS}
               striped
               stickyHeader
             />
+            <Text tone="tertiary" size="small">
+              Savory, Blazing, Heightened, and Vibrant persist recipes also show unnamed
+              High-Risk meat icons on db.ascension.gg; those pages do not name the meat.
+            </Text>
           </Stack>
         </Stack>
       ) : null}
